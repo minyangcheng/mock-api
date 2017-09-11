@@ -1,0 +1,46 @@
+group 'com.min.auto'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'auto-api'
+    version = '1.0.0'
+}
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.google.code.gson:gson:2.8.0'
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("mysql:mysql-connector-java")
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-aop')
+
+    compile('us.codecraft:webmagic-core:0.7.2') {
+        exclude group: 'org.slf4j'
+    }
+    compile('us.codecraft:webmagic-extension:0.7.2') {
+        exclude group: 'org.slf4j'
+    }
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
